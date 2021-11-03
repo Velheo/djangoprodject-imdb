@@ -1,0 +1,68 @@
+{% extends 'imdb/base.html' %}
+{% load static %}
+{% block title %}IMDB{% endblock %}
+
+{% block content %}
+<h1 class="text-center">IMDB</h1>
+
+<h4>Resently added movies</h4>
+<div class="row">
+    {% for movie in last_movies %}
+    <div class="col-6">
+        <div class="row my-2">
+            <div class="col-2">
+                <img src="{{ movie.img.url }}" class="img-fluid">
+            </div>
+            <div class="col-10">
+                <p><a href="{{ movie.url }}">{{ movie }}</a></p>
+                <p>Rating: {{ movie.rating }}</p>
+                <small>views: {{ movie.views }}</small>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+<a href="{% url 'imdb:movie_list' %}" >all movies</a>
+
+<hr>
+
+<h4>Top rated movies</h4>
+<div class="row">
+    {% for movie in best_movie_list %}
+    <div class="col-6">
+        <div class="row my-2">
+            <div class="col-2">
+                <img src="{{ movie.img.url }}" class="img-fluid">
+            </div>
+            <div class="col-10">
+                <p><a href="{{ movie.url }}">{{ movie }}</a></p>
+                <p>Rating: {{ movie.rating }}</p>
+                <small>views: {{ movie.views }}</small>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+<a href="{% url 'imdb:best_movie_list' %}" >best movies</a>
+
+<hr>
+
+<h4>Top Directors</h4>
+<div class="row">
+    {% for director in best_directors %}
+    <div class="col-6">
+        <div class="row my-2">
+            <div class="col-2">
+                <img src="{{ director.img.url }}" class="img-fluid">
+            </div>
+            <div class="col-10">
+                <p><a href="{{ director.url }}">{{ director }}</a></p>
+                <p>Rating Director: {{ director.get_avg_rating_str }}</p>
+                <small>movies: {{ director.movie_set.all|length }}</small>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+<a href="{% url 'imdb:director_list' %}" >directors list</a>
+{% endblock %}

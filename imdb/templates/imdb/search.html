@@ -1,0 +1,46 @@
+{% extends 'imdb/base.html' %}
+{% block title %}Search{% endblock %}
+{% block content %}
+<h1 class="text-center">Searching "{{ string }}"</h1>
+
+{% if movies %}
+<h3>Found movies: {{ movies|length }}</h3>
+{% for movie in movies %}
+<div class="row my-3">
+    <div class="col-2">
+        <img src="{{ movie.img.url }}" class="img-fluid">
+    </div>
+    <div class="col-8">
+        <p><a href="{{ movie.url }}">{{ movie }}</a> ({{ movie.year }})</p>
+    </div>
+    <div class="col-2">
+        <h1>{{ movie.rating }}</h1>
+    </div>
+</div>
+{% endfor %}
+{% else %}
+<h3>No Movies Found</h3>
+{% endif %}
+
+{% if directors %}
+<h3>Found Directors: {{ directors|length }}</h3>
+{% for director in directors %}
+<div class="row my-3">
+    <div class="col-2">
+        <img src="{{ director.img.url }}" class="img-fluid">
+    </div>
+    <div class="col-8">
+        <p><a href="{{ director.url }}">{{ director }}</a></p>
+    </div>
+    <div class="col-2">
+        <h1>{{ director.get_avg_rating_str }}</h1>
+    </div>
+</div>
+{% endfor %}
+{% else %}
+<h3>No Directors Found</h3>
+{% endif %}
+
+
+
+{% endblock %}

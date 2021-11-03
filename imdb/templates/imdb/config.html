@@ -1,0 +1,15 @@
+{% extends 'imdb/base.html' %}
+{% block title %}Config{% endblock %}
+
+{% block content %}
+<h1>Config</h1>
+
+<h3>Add New Movie</h3>
+
+<form method="post" action="{% url 'imdb:add_movie' %}" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{ movie_form }}
+    <input type="submit" value="ADD">
+</form>
+
+{% endblock %}

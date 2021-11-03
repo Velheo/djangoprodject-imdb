@@ -1,0 +1,29 @@
+<a href="#">best movies</a>
+
+{% block title %}IMDB{% endblock %}
+{% block content %}
+<h1 class="text-center">IMDB</h1>
+
+<h4>top directors/h4>
+<div class="row">
+    {% for director in best_directors %}
+    <div class="col-6">
+        <div class="row my-2">
+            <div class="col-2">
+                <img src="{{ director.img.url }}" class="img-fluid">
+            </div>
+            <div class="col-10">
+                <p>
+                    <a href="#">
+                        {% director %}
+                    </a>
+                </p>
+                <h3>{{ movie.rating }}</h3>
+                <small>views: {{ movie.views }}</small>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+<a href="{% url 'imdb:movie_list' %}">all movies</a>
+{% endblock %}

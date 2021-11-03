@@ -1,0 +1,26 @@
+{% extends 'imdb/base.html' %}
+
+{% block title %}{{ movie }}{% endblock %}
+{% block content %}
+<h1 class="text-center">{{ movie }} ({{ movie.year }})</h1>
+<h2><a href="{{ movie.director.url }}">{{ movie.director }}</a></h2>
+
+<div class="row justify-content-between">
+    <div class="col-2">
+        <img src="{{ movie.img.url }}" class="img-fluid">
+        <h1>Rating: {{ movie.rating }}</h1>
+        <p>{{ movie.views }} view{{ movie.views|pluralize }}</p>
+    </div>
+    <div class="col-6">
+        <h1>Movie Trailer:</h1>
+        <iframe width="560" height="315" src="{{ movie.trailer.read.decode }}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+    </div>
+    <div class="col-4">
+        {% if movie.plot %}
+        <h3>Plot:</h3>
+        <p>{{ movie.plot.read.decode }}</p>
+        {% endif %}
+    </div>
+</div>
+
+{% endblock %}
